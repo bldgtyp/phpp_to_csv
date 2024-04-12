@@ -21,6 +21,7 @@ function TestServer() {
             setServerStatus(fetchedData["message"]);
             setColor("green");
             setSpeed(0.00001);
+            setLoading(true);
         };
         fetchProjectData();
     }, []);
