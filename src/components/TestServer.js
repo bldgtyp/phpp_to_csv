@@ -16,7 +16,7 @@ function TestServer() {
     useEffect(() => {
 
         const fetchProjectData = async () => {
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            // await new Promise(resolve => setTimeout(resolve, 2000)); // for testing
             const fetchedData = await fetchServer("server_ready");
             setServerStatus(fetchedData["message"]);
             setColor("green");

@@ -1,7 +1,10 @@
+import pandas as pd
+from typing import Union
+import zipfile
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
-import pandas as pd
-
+from starlette.responses import StreamingResponse
+import io
 
 app = FastAPI()
 
@@ -23,30 +26,39 @@ app.add_middleware(
 
 
 @app.get("/server_ready")
-def awake():
+def awake() -> dict[str, str]:
     return {"message": "Server is ready"}
 
 
 @app.post("/upload/")
 async def upload_file(file: UploadFile = File(...)):
     if not file:
-        return {"error": "No file provided"}
+        return {"error": "No file provided?"}
 
-    # Check if the uploaded file is an Excel file
+    # Ensure the uploaded file is an Excel file
     filename = file.filename or ""
     if not filename.endswith(".xlsx"):
-        return {"error": "Only Excel files (xlsx) are allowed"}
+        return {"error": "Sorry, only Excel files (xlsx) are allowed."}
 
     # Read the Excel file using Pandas
     try:
-        df = pd.read_excel(file.file)
+        xls = pd.read_excel(file.file, sheet_name=None)
     except Exception as e:
-        return {"error": f"Error reading Excel file: {str(e)}"}
+        return {"error": f"Sorry, there was an error reading the Excel file: {str(e)}"}
 
-    # Assuming you want to return the data from cell A1
-    try:
-        cell_data = df.columns[0]
-    except Exception as e:
-        return {"error": f"Error accessing cell data: {str(e)}"}
+    # Create a zip file in memory
+    memory_file = io.BytesIO()
+    with zipfile.ZipFile(memory_file, "w") as zf:
+        # Loop through each sheet in the Excel file
+        for sheet_name, df in xls.items():
+            # Convert the DataFrame to a CSV file and save it in the zip file
+            csv = df.to_csv(index=False)
+            zf.writestr(f"{sheet_name}.csv", csv)
 
-    return {"data": cell_data}
+    memory_file.seek(0)
+
+    # Create a StreamingResponse to return the zip file
+    response = StreamingResponse(memory_file, media_type="application/zip")
+    response.headers["Content-Disposition"] = "attachment; filename=output.zip"
+
+    return response
