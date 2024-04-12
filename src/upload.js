@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import axios from 'axios';
 import './index.css';
+import constants from "./data/constants.json";
 
 const UploadComponent = () => {
+    const API_BASE_URL = process.env.REACT_APP_API_URL || constants.RENDER_API_BASE_URL;
+    const ROUTE = API_BASE_URL + 'upload';
     const [isDragOver, setIsDragOver] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
-
     const handleDragOver = (event) => {
         setIsDragOver(true);
         event.preventDefault();
@@ -27,7 +29,7 @@ const UploadComponent = () => {
         formData.append('file', selectedFile);
 
         try {
-            const response = await axios.post('http://localhost:8000/upload', formData, {
+            const response = await axios.post(ROUTE, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
