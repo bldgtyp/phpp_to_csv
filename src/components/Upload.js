@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import axios from 'axios';
-import './index.css';
-import constants from "./data/constants.json";
+import '../styles/Upload.css';
+import constants from "../data/constants.json";
+import Button from '@mui/material/Button';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 const UploadComponent = () => {
     const API_BASE_URL = process.env.REACT_APP_API_URL || constants.RENDER_API_BASE_URL;
@@ -65,7 +67,16 @@ const UploadComponent = () => {
             >
                 <p>{selectedFile ? selectedFile.name : "Drag and drop PHPP file here."}</p>
             </div>
-            <button onClick={handleUpload}>Upload</button>
+            <Button
+                onClick={handleUpload}
+                component="label"
+                role={undefined}
+                variant="contained"
+                tabIndex={-1}
+                startIcon={<CloudUploadIcon />}
+            >
+                Upload file
+            </Button>
         </div>
     );
 };

@@ -1,0 +1,10 @@
+.testing-server {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 25px;
+    margin-top: 40px;
+    text-align: center;
+    font-weight: 200;
+    font-size: 0.75em;
+}

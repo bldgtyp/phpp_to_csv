@@ -22,6 +22,11 @@ app.add_middleware(
 )
 
 
+@app.get("/server_ready")
+def awake():
+    return {"message": "Server is ready"}
+
+
 @app.post("/upload/")
 async def upload_file(file: UploadFile = File(...)):
     if not file:
