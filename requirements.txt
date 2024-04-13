@@ -4,3 +4,5 @@ python-dotenv
 uvicorn
 pandas
 openpyxl
+isort
+black

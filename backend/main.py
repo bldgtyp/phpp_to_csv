@@ -1,10 +1,16 @@
-import pandas as pd
-from typing import Union
+# -*- coding: utf-8 -*-
+# -*- Python Version: 3.11 -*-
+
+import io
 import zipfile
-from fastapi import FastAPI, UploadFile, File
+
+from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import StreamingResponse
-import io
+
+from backend.data import load_co2e_factors_as_dict
+from backend.read_phpp import load_phpp_data
+from backend.write_csv import create_csv_files_from_phpp_data
 
 app = FastAPI()
 
@@ -25,39 +31,64 @@ app.add_middleware(
 )
 
 
+CO2E_FACTORS = load_co2e_factors_as_dict()
+
+
 @app.get("/server_ready")
 def awake() -> dict[str, str]:
+    """Check if the server is ready to go."""
     return {"message": "Server is ready"}
 
 
 @app.post("/upload/")
 async def upload_file(file: UploadFile = File(...)):
+    """Upload a PHPP Excel file and return a .ZIP file containing .CSV files of the data."""
+
+    # -------------------------------------------------------------------------
+    # Check th uploaded file is an Excel file
     if not file:
         return {"error": "No file provided?"}
 
-    # Ensure the uploaded file is an Excel file
     filename = file.filename or ""
     if not filename.endswith(".xlsx"):
         return {"error": "Sorry, only Excel files (xlsx) are allowed."}
 
-    # Read the Excel file using Pandas
+    # -------------------------------------------------------------------------
+    # Read in the Excel file using Pandas and output the PHPP-Data
     try:
-        xls = pd.read_excel(file.file, sheet_name=None)
+        phpp_data = load_phpp_data(file.file)
     except Exception as e:
         return {"error": f"Sorry, there was an error reading the Excel file: {str(e)}"}
 
-    # Create a zip file in memory
+    # -------------------------------------------------------------------------
+    # Create the CSV files from the PHPP-Data in memory
+    # TODO: get these.....
+    co2e_limit_tons_year = 5.0  # <-- into the PHPP....
+    omitted_assemblies: list[str] = []
+
+    try:
+        csv_files = create_csv_files_from_phpp_data(
+            phpp_data,
+            co2e_limit_tons_year,
+            CO2E_FACTORS,
+            omitted_assemblies,
+        )
+    except Exception as e:
+        return {"error": f"Sorry, there was an error writing the CSV files: {str(e)}"}
+
+    # -------------------------------------------------------------------------
+    # Create a .zip file in memory
     memory_file = io.BytesIO()
     with zipfile.ZipFile(memory_file, "w") as zf:
-        # Loop through each sheet in the Excel file
-        for sheet_name, df in xls.items():
-            # Convert the DataFrame to a CSV file and save it in the zip file
-            csv = df.to_csv(index=False)
-            zf.writestr(f"{sheet_name}.csv", csv)
+        # Loop through each CSV name and data-string in the collection
+        # and add each CSV file data to the .zip file
+        for file_name, csv_file in csv_files:
+            zf.writestr(f"{file_name}.csv", csv_file)
 
-    memory_file.seek(0)
-
+    # -------------------------------------------------------------------------
     # Create a StreamingResponse to return the zip file
+    # Reset the memory file pointer to the start before steaming it back
+    memory_file.seek(0)
     response = StreamingResponse(memory_file, media_type="application/zip")
     response.headers["Content-Disposition"] = "attachment; filename=output.zip"
 

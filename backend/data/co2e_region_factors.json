@@ -1,0 +1,374 @@
+{
+    "NY_Upstate_2020": {
+        "display_name": "NY | Upstate (2020)",
+        "fuels": {
+            "ELECTRIC": {
+                "value": 233.51,
+                "unit": "lbs_co2_per_MWh"
+            },
+            "NATURAL_GAS": {
+                "value": 0.00005311,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "FUEL_OIL_NO2": {
+                "value": 0.00007421,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "FUEL_OIL_NO4": {
+                "value": 0.00007529,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "SOLAR_THERMAL": {
+                "value": 0.0,
+                "unit": "tons_co2_per_kWh"
+            },
+            "WOOD": {
+                "value": 0.0000170,
+                "unit": "tons_co2_per_kWh"
+            }
+        },
+        "eGrid_data_year": 2020,
+        "eGrid_region_code": "NYUP"
+    },
+    "NY_Upstate_2022": {
+        "display_name": "NY | Upstate (2022)",
+        "fuels": {
+            "ELECTRIC": {
+                "value": 274.56,
+                "unit": "lbs_co2_per_MWh"
+            },
+            "NATURAL_GAS": {
+                "value": 0.00005311,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "FUEL_OIL_NO2": {
+                "value": 0.00007421,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "FUEL_OIL_NO4": {
+                "value": 0.00007529,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "SOLAR_THERMAL": {
+                "value": 0.0,
+                "unit": "tons_co2_per_kWh"
+            },
+            "WOOD": {
+                "value": 0.0000170,
+                "unit": "tons_co2_per_kWh"
+            }
+        },
+        "eGrid_data_year": 2022,
+        "eGrid_region_code": "NYUP"
+    },
+    "Long_Island_2020": {
+        "display_name": "NY | Long Island (2020)",
+        "fuels": {
+            "ELECTRIC": {
+                "value": 1203.93,
+                "unit": "lbs_co2_per_MWh"
+            },
+            "NATURAL_GAS": {
+                "value": 0.00005311,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "FUEL_OIL_NO2": {
+                "value": 0.00007421,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "FUEL_OIL_NO4": {
+                "value": 0.00007529,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "SOLAR_THERMAL": {
+                "value": 0.0,
+                "unit": "tons_co2_per_kWh"
+            },
+            "WOOD": {
+                "value": 0.0000170,
+                "unit": "tons_co2_per_kWh"
+            }
+        },
+        "eGrid_data_year": 2020,
+        "eGrid_region_code": "NYLI"
+    },
+    "Long_Island_2022": {
+        "display_name": "NY | Long Island (2022)",
+        "fuels": {
+            "ELECTRIC": {
+                "value": 1201.71,
+                "unit": "lbs_co2_per_MWh"
+            },
+            "NATURAL_GAS": {
+                "value": 0.00005311,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "FUEL_OIL_NO2": {
+                "value": 0.00007421,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "FUEL_OIL_NO4": {
+                "value": 0.00007529,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "SOLAR_THERMAL": {
+                "value": 0.0,
+                "unit": "tons_co2_per_kWh"
+            },
+            "WOOD": {
+                "value": 0.0000170,
+                "unit": "tons_co2_per_kWh"
+            }
+        },
+        "eGrid_data_year": 2022,
+        "eGrid_region_code": "NYLI"
+    },
+    "NYC_2020": {
+        "display_name": "NYC eGrid (2020)",
+        "fuels": {
+            "ELECTRIC": {
+                "value": 634.6,
+                "unit": "lbs_co2_per_MWh"
+            },
+            "NATURAL_GAS": {
+                "value": 0.00005311,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "FUEL_OIL_NO2": {
+                "value": 0.00007421,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "FUEL_OIL_NO4": {
+                "value": 0.00007529,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "SOLAR_THERMAL": {
+                "value": 0.0,
+                "unit": "tons_co2_per_kWh"
+            },
+            "WOOD": {
+                "value": 0.0000170,
+                "unit": "tons_co2_per_kWh"
+            }
+        },
+        "eGrid_data_year": 2020,
+        "eGrid_region_code": "NYCW"
+    },
+    "NYC_LL97": {
+        "display_name": "NYC (LL97)",
+        "fuels": {
+            "ELECTRIC": {
+                "value": 0.000288962,
+                "unit": "tons_co2_per_kWh"
+            },
+            "NATURAL_GAS": {
+                "value": 0.00005311,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "FUEL_OIL_NO2": {
+                "value": 0.00007421,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "FUEL_OIL_NO4": {
+                "value": 0.00007529,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "SOLAR_THERMAL": {
+                "value": 0.0,
+                "unit": "tons_co2_per_kWh"
+            },
+            "WOOD": {
+                "value": 0.0000170,
+                "unit": "tons_co2_per_kWh"
+            }
+        },
+        "eGrid_data_year": null,
+        "eGrid_region_code": null
+    },
+    "Cali_2020": {
+        "display_name": "California (2020)",
+        "fuels": {
+            "ELECTRIC": {
+                "value": 513.46,
+                "unit": "lbs_co2_per_MWh"
+            },
+            "NATURAL_GAS": {
+                "value": 0.00005311,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "FUEL_OIL_NO2": {
+                "value": 0.00007421,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "FUEL_OIL_NO4": {
+                "value": 0.00007529,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "SOLAR_THERMAL": {
+                "value": 0.0,
+                "unit": "tons_co2_per_kWh"
+            },
+            "WOOD": {
+                "value": 0.0000170,
+                "unit": "tons_co2_per_kWh"
+            }
+        },
+        "eGrid_data_year": 2020,
+        "eGrid_region_code": "CAMX"
+    },
+    "Mass_2020": {
+        "display_name": "Massachusetts (2020)",
+        "fuels": {
+            "ELECTRIC": {
+                "value": 528.24,
+                "unit": "lbs_co2_per_MWh"
+            },
+            "NATURAL_GAS": {
+                "value": 0.00005311,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "FUEL_OIL_NO2": {
+                "value": 0.00007421,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "FUEL_OIL_NO4": {
+                "value": 0.00007529,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "SOLAR_THERMAL": {
+                "value": 0.0,
+                "unit": "tons_co2_per_kWh"
+            },
+            "WOOD": {
+                "value": 0.0000170,
+                "unit": "tons_co2_per_kWh"
+            }
+        },
+        "eGrid_data_year": 2020,
+        "eGrid_region_code": "NEWE"
+    },
+    "NJ_2020": {
+        "display_name": "New Jersey (2020)",
+        "fuels": {
+            "ELECTRIC": {
+                "value": 652.46,
+                "unit": "lbs_co2_per_MWh"
+            },
+            "NATURAL_GAS": {
+                "value": 0.00005311,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "FUEL_OIL_NO2": {
+                "value": 0.00007421,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "FUEL_OIL_NO4": {
+                "value": 0.00007529,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "SOLAR_THERMAL": {
+                "value": 0.0,
+                "unit": "tons_co2_per_kWh"
+            },
+            "WOOD": {
+                "value": 0.0000170,
+                "unit": "tons_co2_per_kWh"
+            }
+        },
+        "eGrid_data_year": 2020,
+        "eGrid_region_code": "RFCE"
+    },
+    "CO_2020": {
+        "display_name": "Colorado (2020)",
+        "fuels": {
+            "ELECTRIC": {
+                "value": 1144.8,
+                "unit": "lbs_co2_per_MWh"
+            },
+            "NATURAL_GAS": {
+                "value": 0.00005311,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "FUEL_OIL_NO2": {
+                "value": 0.00007421,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "FUEL_OIL_NO4": {
+                "value": 0.00007529,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "SOLAR_THERMAL": {
+                "value": 0.0,
+                "unit": "tons_co2_per_kWh"
+            },
+            "WOOD": {
+                "value": 0.0000170,
+                "unit": "tons_co2_per_kWh"
+            }
+        },
+        "eGrid_data_year": 2020,
+        "eGrid_region_code": "RMPA"
+    },
+    "ID_2022": {
+        "display_name": "Idaho (2022)",
+        "fuels": {
+            "ELECTRIC": {
+                "value": 602.09,
+                "unit": "lbs_co2_per_MWh"
+            },
+            "NATURAL_GAS": {
+                "value": 0.00005311,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "FUEL_OIL_NO2": {
+                "value": 0.00007421,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "FUEL_OIL_NO4": {
+                "value": 0.00007529,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "SOLAR_THERMAL": {
+                "value": 0.0,
+                "unit": "tons_co2_per_kWh"
+            },
+            "WOOD": {
+                "value": 0.0000170,
+                "unit": "tons_co2_per_kWh"
+            }
+        },
+        "eGrid_data_year": 2022,
+        "eGrid_region_code": "NWPP"
+    },
+    "NC_2020": {
+        "display_name": "North Carolina (2021)",
+        "fuels": {
+            "ELECTRIC": {
+                "value": 642.9,
+                "unit": "lbs_co2_per_MWh"
+            },
+            "NATURAL_GAS": {
+                "value": 0.00005311,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "FUEL_OIL_NO2": {
+                "value": 0.00007421,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "FUEL_OIL_NO4": {
+                "value": 0.00007529,
+                "unit": "tons_co2_per_kBtu"
+            },
+            "SOLAR_THERMAL": {
+                "value": 0.0,
+                "unit": "tons_co2_per_kWh"
+            },
+            "WOOD": {
+                "value": 0.0000170,
+                "unit": "tons_co2_per_kWh"
+            }
+        },
+        "eGrid_data_year": 2021,
+        "eGrid_region_code": "SRVC"
+    }
+}
