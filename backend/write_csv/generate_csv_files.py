@@ -56,7 +56,7 @@ def create_csv_files_from_phpp_data(
         create_csv_SiteEnergy(phpp_data),
         create_csv_Phi_primary_energy_renewable(phpp_data.df_main, phpp_data.df_cert_limits),
         # --- CO2 Emissions
-        # create_csv_CO2E(phpp_data, co2e_limit_tons_yr, co2e_factors),
+        create_csv_CO2E(phpp_data, co2e_limit_tons_yr, co2e_factors),
         # --- Get the Model Variants info
         create_csv_variant_table(phpp_data.df_main, phpp_data.variant_names, omitted_assemblies),
         create_csv_bldg_basic_data_table(phpp_data.df_main),

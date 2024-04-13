@@ -177,7 +177,6 @@ def create_csv_CO2E(
     df_site_energy_MEL_gross = deepcopy(df_site_energy_MEL)
     df_site_energy_MEL_gross["FUEL"] = "ELECTRIC"
     df_site_energy_MEL_gross["CATEGORY"] = "MEL"
-
     # -- Join all the final energy DataFrames together
     final_energy_gross_full_df = pd.concat(
         [
@@ -200,7 +199,7 @@ def create_csv_CO2E(
         ]
     final_energy_co2_conversion_factors.reset_index(inplace=True, drop=True)
 
-    # -- Multiply the dataframes together to get Tons/CO2 for each of the items
+    # -- Multiply the data-frames together to get Tons/CO2 for each of the items
     tonsCO2_df = deepcopy(final_energy_gross_full_df)
     tonsCO2_df[phpp_data.variant_names] = pd.DataFrame(
         final_energy_gross_full_df[phpp_data.variant_names].values

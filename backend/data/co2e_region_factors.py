@@ -30,7 +30,7 @@ def tCO2perkBtu_to_tCO2perkWh(_in: float) -> float:
     return 1 / ((1 / _in) * 0.293071111)
 
 
-def load_co2e_factors_as_dict() -> dict[str, float]:
+def load_co2e_factors_as_dict(region_name: str) -> dict[str, float]:
     """Load in the CO2e Region Factors as a dictionary."""
     CONVERSION_FUNCTIONS = {
         "tons_co2_per_kWh": tCO2perkWh_to_tCO2perkWh,
@@ -48,4 +48,4 @@ def load_co2e_factors_as_dict() -> dict[str, float]:
             fuel_type_data["value"] = conversion_func(fuel_type_data["value"])
             fuel_type_data["unit"] = "tons_co2_per_kWh"
 
-    return data
+    return data[region_name]

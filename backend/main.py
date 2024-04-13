@@ -4,7 +4,7 @@
 import io
 import zipfile
 
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import StreamingResponse
 
@@ -30,8 +30,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-CO2E_FACTORS = load_co2e_factors_as_dict()
+REGION_NAME = "NY_Upstate_2020"
+CO2E_FACTORS = load_co2e_factors_as_dict(REGION_NAME)
 
 
 @app.get("/server_ready")
@@ -73,8 +73,10 @@ async def upload_file(file: UploadFile = File(...)):
             CO2E_FACTORS,
             omitted_assemblies,
         )
+    except KeyError as e:
+        raise HTTPException(status_code=500, detail=f"Sorry, there was an error creating the CSV file: {str(e)}")
     except Exception as e:
-        return {"error": f"Sorry, there was an error writing the CSV files: {str(e)}"}
+        raise HTTPException(status_code=500, detail=f"Sorry, there was an error creating the CSV files: {str(e)}")
 
     # -------------------------------------------------------------------------
     # Create a .zip file in memory
