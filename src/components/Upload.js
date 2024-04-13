@@ -15,6 +15,7 @@ const UploadComponent = () => {
     const [isDragOver, setIsDragOver] = useState(false);
     const [uploadProgress, setUploadProgress] = useState(0);
     const [processing, setProcessing] = useState(false);
+    const [uploadButtonIsDisabled, setUploadButtonIsDisabled] = useState(true);
 
     const handleUpload = async () => {
         if (!selectedFile) {
@@ -34,6 +35,7 @@ const UploadComponent = () => {
                 const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
                 setUploadProgress(percentCompleted);
                 setProcessing(true);
+                setUploadButtonIsDisabled(true);
             }
         })
             .then((response) => {
@@ -81,6 +83,7 @@ const UploadComponent = () => {
                     };
                     reader.readAsText(new Blob([response.data]));
                 }
+                setUploadButtonIsDisabled(false);
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -100,6 +103,7 @@ const UploadComponent = () => {
     };
 
     const handleDrop = (e) => {
+        setUploadButtonIsDisabled(false);
         setDropZoneClassName('file-upload-zone-dropped');
         setIsDragOver(false);
         e.preventDefault();
@@ -142,6 +146,7 @@ const UploadComponent = () => {
                 variant="contained"
                 tabIndex={-1}
                 startIcon={<CloudUploadIcon />}
+                disabled={uploadButtonIsDisabled}
             >
                 Upload file
             </Button>
