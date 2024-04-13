@@ -6,7 +6,7 @@
 
 # Backend (FastAPI)
 #### Setup:
-1. `python3 -m venv .venv`
+1. `python3.11 -m venv .venv` *(Note: Render.com uses Python3.11, so stick with that)*
 1. `source .venv/bin/activate`
 1. `pip install -r requirements.txt`
 #### Run:

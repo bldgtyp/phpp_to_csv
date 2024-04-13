@@ -30,8 +30,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# TODO: get these as user-defined inputs
 REGION_NAME = "NY_Upstate_2020"
 CO2E_FACTORS = load_co2e_factors_as_dict(REGION_NAME)
+CO2E_LIMIT_TONS_YEAR = 5.0  # <-- into the PHPP....
+OMITTED_ASSEMBLIES: list[str] = []
 
 
 @app.get("/server_ready")
@@ -62,16 +65,12 @@ async def upload_file(file: UploadFile = File(...)):
 
     # -------------------------------------------------------------------------
     # Create the CSV files from the PHPP-Data in memory
-    # TODO: get these.....
-    co2e_limit_tons_year = 5.0  # <-- into the PHPP....
-    omitted_assemblies: list[str] = []
-
     try:
         csv_files = create_csv_files_from_phpp_data(
             phpp_data,
-            co2e_limit_tons_year,
+            CO2E_LIMIT_TONS_YEAR,
             CO2E_FACTORS,
-            omitted_assemblies,
+            OMITTED_ASSEMBLIES,
         )
     except KeyError as e:
         raise HTTPException(status_code=500, detail=f"Sorry, there was an error creating the CSV file: {str(e)}")

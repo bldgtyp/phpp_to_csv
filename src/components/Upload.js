@@ -8,18 +8,10 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 const UploadComponent = () => {
     const API_BASE_URL = process.env.REACT_APP_API_URL || constants.RENDER_API_BASE_URL;
     const ROUTE = API_BASE_URL + 'upload';
-    const [isDragOver, setIsDragOver] = useState(false);
+    const [dropZoneClassName, setDropZoneClassName] = useState('file-upload-zone');
     const [selectedFile, setSelectedFile] = useState(null);
-    const handleDragOver = (event) => {
-        setIsDragOver(true);
-        event.preventDefault();
-    };
-
-    const handleDrop = (event) => {
-        event.preventDefault();
-        const file = event.dataTransfer.files[0];
-        setSelectedFile(file);
-    };
+    const [isDragOver, setIsDragOver] = useState(false);
+    const [uploadProgress, setUploadProgress] = useState(0);
 
     const handleUpload = async () => {
         if (!selectedFile) {
@@ -34,6 +26,10 @@ const UploadComponent = () => {
             responseType: 'blob',
             headers: {
                 'Content-Type': 'multipart/form-data'
+            },
+            onUploadProgress: (progressEvent) => {
+                const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+                setUploadProgress(percentCompleted);
             }
         })
             .then((response) => {
@@ -59,6 +55,9 @@ const UploadComponent = () => {
 
                     // Remove the link from the document body
                     document.body.removeChild(link);
+
+                    // Set the upload bar
+                    setUploadProgress(0.0)
                 } else if (contentType === 'application/json') {
                     // Handle the JSON response
                     const reader = new FileReader();
@@ -75,28 +74,39 @@ const UploadComponent = () => {
             });
     };
 
+    // Drag and drop event handlers
+    const handleDragOver = (e) => {
+        e.preventDefault();
+        setIsDragOver(true);
+    };
+
+    const handleDragLeave = (e) => {
+        e.preventDefault();
+        setIsDragOver(false);
+    };
+
+    const handleDrop = (e) => {
+        setDropZoneClassName('file-upload-zone-dropped');
+        setIsDragOver(false);
+        e.preventDefault();
+        e.stopPropagation();
+        setSelectedFile(e.dataTransfer.files[0]);
+    };
+
     return (
         <div>
             <div
                 onDrop={handleDrop}
-                onDragEnter={handleDragOver}
+                className={`${isDragOver ? 'file-upload-zone-drag-over' : dropZoneClassName}`}
                 onDragOver={handleDragOver}
-                onDragLeave={() => setIsDragOver(false)}
-                onMouseOut={() => setIsDragOver(false)}
-                className={isDragOver ? 'drag-over' : ''}
-                style={
-                    {
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        border: '2px dashed #ccc',
-                        height: "100px",
-                        margin: '40px',
-                        textAlign: 'center'
-                    }
-                }
+                onDragLeave={handleDragLeave}
             >
-                <p>{selectedFile ? selectedFile.name : "Drag and drop PHPP file here."}</p>
+                <div>
+                    <p>{selectedFile ? selectedFile.name : "Drag and drop PHPP file here."}</p>
+                </div>
+                <div className="upload-progress-bar-empty" style={{ width: "75%" }}>
+                    <div className="upload-progress-bar-fill" style={{ width: `${uploadProgress}%` }} />
+                </div>
             </div>
             <Button
                 onClick={handleUpload}
