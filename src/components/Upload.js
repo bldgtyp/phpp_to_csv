@@ -23,6 +23,9 @@ const UploadComponent = () => {
             return;
         }
 
+        setProcessing(true);
+        setUploadButtonIsDisabled(true);
+
         const formData = new FormData();
         formData.append('file', selectedFile);
 
@@ -34,8 +37,6 @@ const UploadComponent = () => {
             onUploadProgress: (progressEvent) => {
                 const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
                 setUploadProgress(percentCompleted);
-                setProcessing(true);
-                setUploadButtonIsDisabled(true);
             }
         })
             .then((response) => {
@@ -120,18 +121,21 @@ const UploadComponent = () => {
                 onDragLeave={handleDragLeave}
             >
                 <div>
-                    {processing ? <GridLoader
-                        color="#1976d2"
-                        loading={processing}
-                        cssOverride={{
-                            display: "block",
-                            margin: "0 auto",
-                        }}
-                        size="8"
-                        speedMultiplier="0.75"
-                        aria-label="Loading Spinner"
-                        data-testid="loader"
-                    /> :
+                    {processing ? <div style={{ display: "flex", alignItems: "center", flexDirection: "row" }}>
+                        <p>Please Wait. Processing...   </p>
+                        <GridLoader
+                            color="#1976d2"
+                            loading={processing}
+                            cssOverride={{
+                                display: "block",
+                                margin: "0 auto",
+                            }}
+                            size="5"
+                            speedMultiplier="0.85"
+                            aria-label="Loading Spinner"
+                            data-testid="loader"
+                        />
+                    </div> :
                         <p>{selectedFile ? selectedFile.name : "Drag and drop PHPP file here."}</p>
                     }
                 </div>
