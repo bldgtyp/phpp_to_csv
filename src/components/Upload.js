@@ -4,6 +4,8 @@ import '../styles/Upload.css';
 import constants from "../data/constants.json";
 import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import GridLoader from "react-spinners/GridLoader";
+
 
 const UploadComponent = () => {
     const API_BASE_URL = process.env.REACT_APP_API_URL || constants.RENDER_API_BASE_URL;
@@ -12,6 +14,7 @@ const UploadComponent = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [isDragOver, setIsDragOver] = useState(false);
     const [uploadProgress, setUploadProgress] = useState(0);
+    const [processing, setProcessing] = useState(false);
 
     const handleUpload = async () => {
         if (!selectedFile) {
@@ -30,6 +33,7 @@ const UploadComponent = () => {
             onUploadProgress: (progressEvent) => {
                 const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
                 setUploadProgress(percentCompleted);
+                setProcessing(true);
             }
         })
             .then((response) => {
@@ -58,6 +62,16 @@ const UploadComponent = () => {
 
                     // Set the upload bar
                     setUploadProgress(0.0)
+
+                    // Reset the selected file
+                    setSelectedFile(null);
+
+                    // Reset the processing state
+                    setProcessing(false);
+
+                    // Give the user a success alert message
+                    alert('Success! Your PHPP has been processed. Please check your "downloads" folder for the results .ZIP file.');
+
                 } else if (contentType === 'application/json') {
                     // Handle the JSON response
                     const reader = new FileReader();
@@ -102,7 +116,20 @@ const UploadComponent = () => {
                 onDragLeave={handleDragLeave}
             >
                 <div>
-                    <p>{selectedFile ? selectedFile.name : "Drag and drop PHPP file here."}</p>
+                    {processing ? <GridLoader
+                        color="#1976d2"
+                        loading={processing}
+                        cssOverride={{
+                            display: "block",
+                            margin: "0 auto",
+                        }}
+                        size="8"
+                        speedMultiplier="0.75"
+                        aria-label="Loading Spinner"
+                        data-testid="loader"
+                    /> :
+                        <p>{selectedFile ? selectedFile.name : "Drag and drop PHPP file here."}</p>
+                    }
                 </div>
                 <div className="upload-progress-bar-empty" style={{ width: "75%" }}>
                     <div className="upload-progress-bar-fill" style={{ width: `${uploadProgress}%` }} />
