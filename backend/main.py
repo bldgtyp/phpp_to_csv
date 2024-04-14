@@ -8,7 +8,6 @@ from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import StreamingResponse
 
-from backend.data import load_co2e_factors_as_dict
 from backend.read_phpp import load_phpp_data
 from backend.write_csv import create_csv_files_from_phpp_data
 
@@ -31,8 +30,6 @@ app.add_middleware(
 )
 
 # TODO: get these as user-defined inputs
-REGION_NAME = "NY_Upstate_2020"
-CO2E_FACTORS = load_co2e_factors_as_dict(REGION_NAME)
 CO2E_LIMIT_TONS_YEAR = 5.0  # <-- into the PHPP....
 OMITTED_ASSEMBLIES: list[str] = []
 
@@ -69,7 +66,6 @@ async def upload_file(file: UploadFile = File(...)):
         csv_files = create_csv_files_from_phpp_data(
             phpp_data,
             CO2E_LIMIT_TONS_YEAR,
-            CO2E_FACTORS,
             OMITTED_ASSEMBLIES,
         )
     except KeyError as e:

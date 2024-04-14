@@ -130,7 +130,7 @@ const UploadComponent = () => {
                                 display: "block",
                                 margin: "0 auto",
                             }}
-                            size="5"
+                            size="5px"
                             speedMultiplier="0.85"
                             aria-label="Loading Spinner"
                             data-testid="loader"

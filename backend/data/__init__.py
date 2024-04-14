@@ -1,1 +1,0 @@
-from backend.data.co2e_region_factors import load_co2e_factors_as_dict
