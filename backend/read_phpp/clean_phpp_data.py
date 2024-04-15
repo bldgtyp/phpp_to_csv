@@ -88,16 +88,21 @@ def get_absolute_certification_limits_as_DataFrame(
     # Get all the certification LIMITS in ../m2 values
     cert_limits_specific = _df_main.loc[317:325]
 
+    # Fill any string '-' values with 0
+    # If its EnerPHit or LBI, will not have any values for Peak Load limits
+    cert_limits_specific = cert_limits_specific.replace("-", 0.0)
+
+    # Get the TFA for each variant
     tfa_df = get_tfa_as_DataFrame(_df_main)
 
     # Calc the total limits (not .../m2 results for certification values)
-    cert_limits_abs = pd.DataFrame()
+    cert_limits_abs = pd.DataFrame()  # Start with an empty DataFrame
     for variant in cert_limits_specific.columns[:2]:  # Data ID cols
         cert_limits_abs[variant] = cert_limits_specific[variant]
 
     cert_limits_abs["Units"] = cert_limits_specific["Units"].str.replace("/m2", "")  # 'm2' strings
-
     for variant in cert_limits_specific.columns[2:]:  # The data cols
+        print(f"cert_limits_specific[variant]: {cert_limits_specific[variant]}")
         cert_limits_abs[variant] = cert_limits_specific[variant].mul(tfa_df[variant])
 
     return cert_limits_abs

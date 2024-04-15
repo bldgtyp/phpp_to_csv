@@ -2,6 +2,7 @@
 # -*- Python Version: 3.11 -*-
 
 import io
+import traceback
 import zipfile
 
 from fastapi import FastAPI, File, UploadFile, HTTPException
@@ -58,6 +59,8 @@ async def upload_file(file: UploadFile = File(...)):
     try:
         phpp_data = load_phpp_data(file.file)
     except Exception as e:
+        error_info = traceback.format_exc()
+        print(f"Error: {error_info}")
         return {"error": f"Sorry, there was an error reading the Excel file: {str(e)}"}
 
     # -------------------------------------------------------------------------
@@ -69,8 +72,12 @@ async def upload_file(file: UploadFile = File(...)):
             OMITTED_ASSEMBLIES,
         )
     except KeyError as e:
+        error_info = traceback.format_exc()
+        print(f"Error: {error_info}")
         raise HTTPException(status_code=500, detail=f"Sorry, there was an error creating the CSV file: {str(e)}")
     except Exception as e:
+        error_info = traceback.format_exc()
+        print(f"Error: {error_info}")
         raise HTTPException(status_code=500, detail=f"Sorry, there was an error creating the CSV files: {str(e)}")
 
     # -------------------------------------------------------------------------
