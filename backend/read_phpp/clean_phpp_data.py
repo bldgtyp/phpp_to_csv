@@ -102,7 +102,6 @@ def get_absolute_certification_limits_as_DataFrame(
 
     cert_limits_abs["Units"] = cert_limits_specific["Units"].str.replace("/m2", "")  # 'm2' strings
     for variant in cert_limits_specific.columns[2:]:  # The data cols
-        print(f"cert_limits_specific[variant]: {cert_limits_specific[variant]}")
         cert_limits_abs[variant] = cert_limits_specific[variant].mul(tfa_df[variant])
 
     return cert_limits_abs
